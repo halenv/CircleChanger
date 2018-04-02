@@ -287,7 +287,6 @@ class CircleChanger(object):
         r_color = self.colors[r_index]
         self.circle.fill_color = r_color
 
-
     def swell_or_shrink_repeatedly(self,
                                    amount_to_swell_or_shrink,
                                    times_to_swell_or_shrink):
@@ -347,6 +346,12 @@ class CircleChanger(object):
         #   (below).  Third, implement and test this method.
         ################################################################
 
+        for _ in range(times_to_swell_or_shrink):
+            self.swell_or_shrink_once(times_to_swell_or_shrink)
+            self.draw()
+            self.swell_or_shrink_once(-amount_to_swell_or_shrink)
+            self.draw()
+
     def swallow(self, other_circle_changer):
         """
         What comes in:
@@ -373,7 +378,7 @@ class CircleChanger(object):
             :rtype CircleChanger
         """
         ################################################################
-        # TODO: 6.
+        # DONE: 6.
         #   First, READ the doc-string (specification) above.
         #   Second, READ the   run_test_swallow   function (below).
         #   Third, implement and test this method.
@@ -383,6 +388,18 @@ class CircleChanger(object):
         #   the center and radius of the new CircleChanger.
         #   NO CREDIT if you use the distance formula here.
         ################################################################
+
+        center_x = self.circle.center.halfway_to(other_circle_changer.circle.center).x
+        center_y = self.circle.center.halfway_to(other_circle_changer.circle.center).y
+        # new_cent = rg.Point(center_x, center_y)
+
+        distance = self.circle.center.get_distance_from(other_circle_changer.circle.center)
+        new_radius = distance / 2
+        new_colors = self.colors + other_circle_changer.colors
+
+        new_cc = CircleChanger(center_x, center_y, new_radius, 'red', new_colors)
+
+        return new_cc
 
     def change_color(self, index_of_color):
         """
@@ -404,11 +421,13 @@ class CircleChanger(object):
             :type index_of_color: int
         """
         ################################################################
-        # TODO: 7.
+        # DONE: 7.
         #   First, READ the doc-string (specification) above.
         #   Second, READ the   run_test_change_color   function (below).
         #   Third, implement and test this method.
         ################################################################
+
+        self.circle.fill_color = self.colors[index_of_color]
 
     def change_to_original_color(self):
         """
