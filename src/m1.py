@@ -498,12 +498,10 @@ class CircleChanger(object):
             self.circle.fill_color = self.colors[self.times_called]
             self.times_called = self.times_called + 1
 
-
-
-
 ########################################################################
 # The TEST functions for the  CircleChanger  class begin here.
 ########################################################################
+
 
 def run_test_init():
     """ Tests the   __init__   method of the CircleChanger class. """
