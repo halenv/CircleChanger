@@ -109,6 +109,7 @@ class CircleChanger(object):
         self.colors = colors
 
         self.original_color = fill_color
+        self.times_called = 0
 
     def __repr__(self):
         """
@@ -342,7 +343,7 @@ class CircleChanger(object):
             :type times_to_swell_or_shrink:  int
         """
         ################################################################
-        # TODO: 5.
+        # DONE: 5.
         #   First, READ the doc-string (specification) above.
         #   Second, READ the  run_test_swell_or_shrink_repeatedly  function
         #   (below).  Third, implement and test this method.
@@ -483,11 +484,21 @@ class CircleChanger(object):
         fill color have no effect on or interaction with this method.
         """
         ################################################################
-        # TODO: 9.
+        # DONE: 9.
         #   First, READ the doc-string (specification) above.
         #   Second, READ the   run_test_change_to_next_color_in_tuple
         #   function (below).  Third, implement and test this method.
         ################################################################
+
+        if self.times_called <= (len(self.colors) - 1):
+            self.circle.fill_color = self.colors[self.times_called]
+            self.times_called = self.times_called + 1
+        else:
+            self.times_called = 0
+            self.circle.fill_color = self.colors[self.times_called]
+            self.times_called = self.times_called + 1
+
+
 
 
 ########################################################################
